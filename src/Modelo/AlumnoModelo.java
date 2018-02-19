@@ -44,7 +44,25 @@ public class AlumnoModelo extends Conector{
 		
 	}
 	
-	public Alumno selectPorId(){
+	public Alumno selectPorId(int id){
+		
+		
+		try {
+			Statement st = super.conexion.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM alumnos WHERE id = " + id);
+			if(rs.next()){
+				Alumno alumno = new Alumno();
+				alumno.setDni(rs.getString("dni"));
+				alumno.setNombre(rs.getString("nombre"));
+				alumno.setEmail(rs.getString("email"));
+				
+				return alumno;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 		
 	}
 
