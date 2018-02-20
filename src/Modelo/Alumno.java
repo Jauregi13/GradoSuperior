@@ -1,12 +1,15 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Alumno {
 	
 	private int id;
 	private String dni;
 	private String nombre;
 	private String email;
-	
+	// por la relacion
+	private ArrayList<Matricula> matriculas;
 	
 	
 	public int getId() {
@@ -33,6 +36,13 @@ public class Alumno {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public ArrayList<Matricula> getMatriculas() {
+		return matriculas;
+	}
+	public void setMatriculas(ArrayList<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+	
 	
 
 }

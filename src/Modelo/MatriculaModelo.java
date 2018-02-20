@@ -20,6 +20,8 @@ public class MatriculaModelo extends Conector {
 	
 	public ArrayList<Matricula> listarMatriculas(){
 		ArrayList<Matricula> matriculas = new ArrayList();
+		AlumnoModelo alumnoModelo = new AlumnoModelo();
+		AsignaturaModelo asignaturaModelo = new AsignaturaModelo();
 		try {
 			Statement st = super.conexion.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM matriculas");
@@ -27,8 +29,8 @@ public class MatriculaModelo extends Conector {
 			if(rs.next()){
 				Matricula matricula = new Matricula();
 				matricula.setFecha(rs.getDate("fecha"));
-				matricula.setId_alumno(rs.getInt("id_alumno"));
-				matricula.setId_asignatura(rs.getInt("id_asignatura"));
+				matricula.setAlumno(alumnoModelo.selectPorId(rs.getInt("id_alumno")));
+				matricula.setAsignatura(asignaturaModelo.selectPorId(rs.getInt("id_asignatura")));
 				
 				matriculas.add(matricula);
 				

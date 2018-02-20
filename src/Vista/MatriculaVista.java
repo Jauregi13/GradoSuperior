@@ -10,40 +10,28 @@ import Modelo.AlumnoModelo;
 import Modelo.Asignatura;
 import Modelo.AsignaturaModelo;
 import Modelo.Matricula;
+
 public class MatriculaVista {
-
-	public static void main(String[] args) {
-		
-		MatriculaModelo matriculaModelo = new MatriculaModelo();
-		ArrayList<Matricula> matriculas = matriculaModelo.listarMatriculas();
-		
-		
-
-	}
 	
-	private void mostrarMatriculas(ArrayList<Matricula> matriculas){
+	MatriculaModelo matriculaModelo = new MatriculaModelo();
+
+	public void mostrarMatriculas() {
+		ArrayList<Matricula> matriculas = matriculaModelo.listarMatriculas();
 		Iterator<Matricula> i = matriculas.iterator();
-		
-		while(i.hasNext()){
+
+		while (i.hasNext()) {
 			Matricula matricula = i.next();
-			
+
 			mostrarMatricula(matricula);
-			
-			
+
 		}
 	}
 
-	private void mostrarMatricula(Matricula matricula) {
-		
-		AlumnoModelo alumnoModelo = new AlumnoModelo();
-		Alumno alumno = alumnoModelo.selectPorId(matricula.getId_alumno());
-		
-		AsignaturaModelo asignaturaModelo = new AsignaturaModelo();
-		Asignatura asignatura = asignaturaModelo.selectPorId(matricula.getId_asignatura());
-		
-		System.out.println(alumno.getDni() + " " + alumno.getNombre() + " " + asignatura.getNombre() + " "
-				+ asignatura.getHoras() + " " + matricula.getFecha());
-		
+	public void mostrarMatricula(Matricula matricula) {
+
+		System.out.println(matricula.getAlumno().getNombre() + " : " + matricula.getAlumno().getDni() + " : "
+				+ matricula.getAsignatura().getNombre() + " : " + matricula.getAsignatura().getHoras());
+
 	}
 
 }

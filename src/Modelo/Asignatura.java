@@ -1,11 +1,14 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Asignatura {
 	
 	private int id;
 	private String nombre;
 	private int horas;
-	
+	//por la relacion
+	private ArrayList<Matricula> matriculas;
 	
 	
 	public int getId() {
@@ -25,6 +28,12 @@ public class Asignatura {
 	}
 	public void setHoras(int horas) {
 		this.horas = horas;
+	}
+	public ArrayList<Matricula> getMatriculas() {
+		return matriculas;
+	}
+	public void setMatriculas(ArrayList<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 	
 	
