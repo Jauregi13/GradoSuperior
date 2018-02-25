@@ -31,7 +31,7 @@ public class AlumnoModelo extends Conector{
 	
 	public ArrayList<Alumno> selectAllConMatriculas(){
 		ArrayList<Alumno> alumnos = new ArrayList();
-		AsignaturaModelo asignaturaModelo = new AsignaturaModelo();
+		MatriculaModelo matriculaModelo = new MatriculaModelo();
 		try {
 			Statement st = super.conexion.createStatement();			
 			ResultSet rs = st.executeQuery("SELECT * FROM alumnos");
@@ -42,6 +42,7 @@ public class AlumnoModelo extends Conector{
 				alumno.setDni(rs.getString("dni"));
 				alumno.setNombre(rs.getString("nombre"));
 				alumno.setEmail(rs.getString("email"));
+				alumno.setMatriculas(matriculaModelo.selectPorAlumno(alumno));
 				alumnos.add(alumno);
 				
 				

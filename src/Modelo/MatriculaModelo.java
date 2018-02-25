@@ -46,4 +46,29 @@ public class MatriculaModelo extends Conector {
 		
 	}
 
+	public ArrayList<Matricula> selectPorAlumno(Alumno alumno) {
+		
+		try {
+			AsignaturaModelo asignaturaModelo = new AsignaturaModelo();
+			ArrayList<Matricula> asignaturas = new ArrayList();
+			PreparedStatement pst = super.conexion.prepareStatement("SELECT * FROM matriculas WHERE id_alumno = ?");
+			
+			pst.setInt(1, alumno.getId());
+			
+			ResultSet rs = pst.executeQuery();
+			
+			while(rs.next()){
+				Matricula matricula = new Matricula();
+				matricula.setAsignatura(asignaturaModelo.selectPorId(rs.getInt("id_asignatura")));
+				matricula.setFecha(rs.getDate("fecha"));
+				
+				asignaturas.add(matricula);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 }
