@@ -3,6 +3,7 @@ package Vista;
 import Modelo.MatriculaModelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -34,6 +35,10 @@ public class MatriculaVista {
 				matricular(scan);
 
 				break;
+				
+			case SALIR:
+				
+				break;
 
 			default:
 				break;
@@ -47,11 +52,14 @@ public class MatriculaVista {
 	private void matricular(Scanner scan) {
 
 		AlumnoModelo alumnoModelo = new AlumnoModelo();
+		AsignaturaModelo asignaturaModelo = new AsignaturaModelo();
 
 		System.out.println("Introduce el dni del alumno a matricular");
 		String dni = scan.nextLine();
+		
+		Alumno alumno = alumnoModelo.selectPorDni(dni);
 
-		while (!alumnoModelo.selectPorDni(dni)){
+		while (alumno == null){
 			System.out.println("Ese dni no existe");
 			System.out.println("Introduce otro dni:");
 			dni = scan.nextLine();
@@ -60,6 +68,14 @@ public class MatriculaVista {
 		System.out.println("Introduce el nombre de la asignatura para matricular:");
 		String nombre_asignatura = scan.nextLine();
 		
+		Asignatura asignatura = asignaturaModelo.selectPorNombre(nombre_asignatura);
+		
+		Matricula matricula = new Matricula();
+		
+		Date fecha_actual = new Date();
+		matricula.setAlumno(alumno);
+		matricula.setAsignatura(asignatura);
+		matricula.setFecha(fecha_actual);
 		matriculaModelo.añadirMatricula(matricula);
 
 	}

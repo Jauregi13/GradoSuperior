@@ -11,7 +11,11 @@ public class MatriculaModelo extends Conector {
 	public void añadirMatricula(Matricula matricula){
 		
 		try {
-			PreparedStatement pst = super.conexion.prepareStatement("INSERT INTO matriculas values (?,?,?)");
+			PreparedStatement pst = super.conexion.prepareStatement("INSERT INTO matriculas (id_alumno, id_asignatura, fecha) values (?,?,?)");
+			
+			pst.setInt(1, matricula.getAlumno().getId());
+			pst.setInt(2, matricula.getAsignatura().getId());
+			pst.setDate(3, new java.sql.date(matricula.getFecha()));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

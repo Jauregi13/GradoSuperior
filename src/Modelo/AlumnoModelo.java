@@ -91,7 +91,7 @@ public class AlumnoModelo extends Conector{
 		
 	}
 
-	public boolean selectPorDni(String dni) {
+	public Alumno selectPorDni(String dni) {
 		
 		try {
 			PreparedStatement pst = super.conexion.prepareStatement("SELECT * FROM alumnos WHERE dni = ?");
@@ -101,12 +101,18 @@ public class AlumnoModelo extends Conector{
 			ResultSet rs = pst.executeQuery();
 			
 			if(rs.next()){
-				return true;
+				Alumno alumno = new Alumno();
+				alumno.setId(rs.getInt("id"));
+				alumno.setDni(rs.getString("dni"));
+				alumno.setNombre(rs.getString("nombre"));
+				alumno.setEmail(rs.getString("email"));
+				
+				return alumno;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		return false;
+		return null;
 	}
 
 }

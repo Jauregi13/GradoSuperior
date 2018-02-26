@@ -42,4 +42,27 @@ public class AsignaturaModelo extends Conector{
 		
 	}
 
+
+	public Asignatura selectPorNombre(String nombre_asignatura) {
+		
+		try {
+			PreparedStatement pst = super.conexion.prepareStatement("SELECT * FROM asignaturas WHERE nombre = " + nombre_asignatura);
+			
+			pst.setString(1, nombre_asignatura);
+			ResultSet rs = pst.executeQuery();
+			
+			if(rs.next()){
+				Asignatura asignatura = new Asignatura();
+				asignatura.setId(rs.getInt("id"));
+				asignatura.setNombre(rs.getString("nombre"));
+				asignatura.setHoras(rs.getInt("horas"));
+				
+				return asignatura;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
