@@ -14,7 +14,8 @@ public class AlumnoVista {
 		
 		final int MOSTRAR_MATRICULAS = 1;
 		final int MOSTRAR_ALUMNOS_MATRICULAS = 2;
-		final int SALIR = 3;
+		final int INSERTAR_ALUMNO = 3;
+		final int SALIR = 4;
 		AlumnoModelo alumnoModelo = new AlumnoModelo();
 		Scanner scan = new Scanner(System.in);
 		int opcion = 0;
@@ -23,6 +24,7 @@ public class AlumnoVista {
 		do{
 			System.out.println(MOSTRAR_MATRICULAS + ". Mostrar todos los alumnos");
 			System.out.println(MOSTRAR_ALUMNOS_MATRICULAS + ". Mostrar los alumnos con cada asignatura matriculada");
+			System.out.println(INSERTAR_ALUMNO + ". Insertar un alumno");
 			System.out.println(SALIR + ". Salir del menu");
 			
 			opcion = Integer.parseInt(scan.nextLine());
@@ -38,6 +40,26 @@ public class AlumnoVista {
 				alumnos = alumnoModelo.selectAllConMatriculas();
 				
 				mostrarAlumnos(alumnos);
+				break;
+				
+			case INSERTAR_ALUMNO:
+				
+				System.out.println("Introduce el dni:");
+				String dni = scan.nextLine();
+				
+				System.out.println("Introduce el nombre");
+				String nombre = scan.nextLine();
+				
+				System.out.println("Introduce el email:");
+				String email = scan.nextLine();
+				
+				Alumno alumno = new Alumno();
+				alumno.setDni(dni);
+				alumno.setNombre(nombre);
+				alumno.setEmail(email);
+				
+				alumnoModelo.insertar(alumno);
+				
 				break;
 				
 			case SALIR:

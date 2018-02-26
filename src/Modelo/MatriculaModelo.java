@@ -63,6 +63,8 @@ public class MatriculaModelo extends Conector {
 				matricula.setFecha(rs.getDate("fecha"));
 				
 				asignaturas.add(matricula);
+				
+				return asignaturas;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

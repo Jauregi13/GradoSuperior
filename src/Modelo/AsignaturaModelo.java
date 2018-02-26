@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -23,6 +24,22 @@ public class AsignaturaModelo extends Conector{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	public void insertAsignatura(Asignatura asignatura){
+		
+		try {
+			PreparedStatement pst = super.conexion.prepareStatement("INSERT INTO asignaturas (nombre, horas) VALUES (?,?)");
+			
+			pst.setString(1, asignatura.getNombre());
+			pst.setInt(2, asignatura.getHoras());
+			
+			pst.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

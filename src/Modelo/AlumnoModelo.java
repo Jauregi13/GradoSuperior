@@ -91,4 +91,22 @@ public class AlumnoModelo extends Conector{
 		
 	}
 
+	public boolean selectPorDni(String dni) {
+		
+		try {
+			PreparedStatement pst = super.conexion.prepareStatement("SELECT * FROM alumnos WHERE dni = ?");
+			
+			pst.setString(1, dni);
+			
+			ResultSet rs = pst.executeQuery();
+			
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+
 }
