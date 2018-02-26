@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AsignaturaModelo extends Conector{
 	
@@ -63,6 +64,36 @@ public class AsignaturaModelo extends Conector{
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	public ArrayList<Asignatura> selectConAlumnos(){
+		ArrayList<Asignatura> asignaturas = new ArrayList();
+		MatriculaModelo matriculaModelo = new MatriculaModelo();
+		try {
+			Statement st = super.conexion.createStatement();
+			
+			ResultSet rs = st.executeQuery("SELECT * FROM asignaturas");
+			
+			while(rs.next()){
+				
+				Asignatura asignatura = new Asignatura();
+				asignatura.setId(rs.getInt("id"));
+				asignatura.setNombre(rs.getString("nombre"));
+				asignatura.setHoras(rs.getInt("horas"));
+				asignatura.setMatriculas(matriculaModelo.selectPorAsignatura(asignatura));
+				
+				asignaturas.add(asignatura);
+				
+				return asignaturas;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
+		
 	}
 
 }
