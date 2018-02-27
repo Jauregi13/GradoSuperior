@@ -10,6 +10,7 @@ public class Alumno {
 	private String email;
 	// por la relacion
 	private ArrayList<Matricula> matriculas;
+	private Provincia provincia;
 	
 	
 	public int getId() {

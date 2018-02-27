@@ -46,8 +46,8 @@ public class AlumnoModelo extends Conector{
 				alumnos.add(alumno);
 				
 				
-				return alumnos;
 			}
+			return alumnos;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

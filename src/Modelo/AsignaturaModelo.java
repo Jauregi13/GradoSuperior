@@ -47,7 +47,7 @@ public class AsignaturaModelo extends Conector{
 	public Asignatura selectPorNombre(String nombre_asignatura) {
 		
 		try {
-			PreparedStatement pst = super.conexion.prepareStatement("SELECT * FROM asignaturas WHERE nombre = " + nombre_asignatura);
+			PreparedStatement pst = super.conexion.prepareStatement("SELECT * FROM asignaturas WHERE nombre = ?");
 			
 			pst.setString(1, nombre_asignatura);
 			ResultSet rs = pst.executeQuery();
@@ -85,8 +85,9 @@ public class AsignaturaModelo extends Conector{
 				
 				asignaturas.add(asignatura);
 				
-				return asignaturas;
+				
 			}
+			return asignaturas;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
